@@ -14,6 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.getUserData = this.getUserData.bind(this);
+    this.getUserData();
   }
 
   state = {
@@ -29,9 +30,6 @@ class App extends React.Component {
 
   //getUserData is a method we'll use to make the api call
   getUserData = async (e) => {
-  
-    const token = e.target.elements.userId.value;
-    e.preventDefault();   
     const api_call = await fetch(`https://my-json-server.typicode.com/deepak1084/demo/db`);
     const response = await api_call.json();
     console.log(response);  
@@ -46,21 +44,17 @@ class App extends React.Component {
       <div>
          <div className="wrapper">
           <div className="main">
-            <div className="container">
-              <div className="row">
-                <div className="col-xs-5 title-container">
-                <Titles />
+            <div className="container" className="col-xs-6 title-container">
+                <div >
+                <Titles/>
                 </div>
-                <div className="col-xs-7 form-container">
-
-                <Form loadWeather={this.getUserData} />                  
+                </div>
+                <div className="col-xs-6 form-container">                          
                    {_.map(posts, (post, index) =>  {
                       return (
                         <Card description={post.description} headline={post.headline} image = {post.image}/> ) }                    
-                  )}
-                </div>
+                  )}                            
               </div>
-            </div>
           </div>
         </div>
       </div>
