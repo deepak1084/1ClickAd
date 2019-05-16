@@ -2,6 +2,8 @@ import React from "react";
 import Weather from "./components/weather";
 import Form from "./components/form";
 import Ads from "./components/Ads";
+import Card from "./components/Card";
+
 // import SWeather from "./components/stateless_weather";
 // import SForm from "./components/stateless_form"
 import Titles from "./components/titles";
@@ -54,7 +56,7 @@ class App extends React.Component {
                 <Form loadWeather={this.getUserData} />                  
                    {_.map(posts, (post, index) =>  {
                       return (
-                        <Ads description={post.description} headline={post.headline} /> ) }                    
+                        <Card description={post.description} headline={post.headline} image = {post.image}/> ) }                    
                   )}
                 </div>
               </div>
