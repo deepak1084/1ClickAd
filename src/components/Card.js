@@ -82,9 +82,9 @@ class RecipeReviewCard extends React.Component {
         <div className = {classes.box}>
         <div>
         <div>
-        <div style={{color: "#1a0dab"}} >{this.props.headline} </div>
+        <div style={{color: "#1a0dab"}} >{this.props.headline1} | {this.props.headline2} </div>
         <div style={{display: "inline-block"}} className = {classes.AdBox}>Ad</div>
-        <div style={{display: "inline-block"}} className = {classes.AdBoxNext}>www.google.com</div>
+        <div style={{display: "inline-block"}} className = {classes.AdBoxNext}>{this.props.url}</div>
         </div>
         </div>
           <div >{this.props.description} </div>
