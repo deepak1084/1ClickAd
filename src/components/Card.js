@@ -16,11 +16,38 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   card: {
     maxWidth: 400,
   },
+  box: {
+  padding: '10px',
+  border: '1px solid #eee' ,
+  margin: 0
+},
+AdBox: {
+    flex: '0 0 auto',
+    display: 'inline-block',
+    border: '1px solid #006621',
+    color: '#006621',
+    padding: '0 2px',
+    fontSize: '12px',
+    lineHeight: '14px',
+    verticalAlign: 'baseline',
+    marginRight: '5px'
+},
+AdBoxNext: {
+    flex: '0 0 auto',
+    display: 'inline-block',
+    color: '#006621',
+    padding: '0 2px',
+    fontSize: '12px',
+    lineHeight: '14px',
+    verticalAlign: 'baseline',
+    marginRight: '5px'
+},
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -50,28 +77,23 @@ class RecipeReviewCard extends React.Component {
 
     return (
       <Card >
-        <CardHeader
-          avatar={
-            <Avatar aria-label="Recipe" className={this.props.headline}>
-              G
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={this.props.headline}
-        />
-        <CardMedia
-          className={classes.media}
-          image={this.props.image}
-          title={this.props.headline}
-        />
+        <CardHeader title= "Your Ad" />
         <CardContent>
-          <Typography component="p">
-            {this.props.description}
-          </Typography>
+        <div className = {classes.box}>
+        <div>
+        <div>
+        <div style={{color: "#1a0dab"}} >{this.props.headline} </div>
+        <div style={{display: "inline-block"}} className = {classes.AdBox}>Ad</div>
+        <div style={{display: "inline-block"}} className = {classes.AdBoxNext}>www.google.com</div>
+        </div>
+        </div>
+          <div >{this.props.description} </div>
+          </div>
+          <CardActions>
+        <Button size="large" color="primary">
+          Create Ad
+        </Button>        
+      </CardActions>
         </CardContent>                      
       </Card>
     );
