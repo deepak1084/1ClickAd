@@ -17,6 +17,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import StepSlider from "./StepSlider";
+
 
 const styles = theme => ({
   card: {
@@ -70,31 +72,121 @@ AdBoxNext: {
   },
 });
 
+
+
 class RecipeReviewCard extends React.Component {  
 
+constructor(props) {
+    super(props);
+    this.handleHeadlineChange = this.handleHeadlineChange.bind(this)
+    this.handleUrlChange = this.handleUrlChange.bind(this)
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
+  }
+
+state = {  
+    edit: false,
+    value: '50',
+    headline: this.props.headline1 + '|' + this.props.headline2,
+    description: this.props.description,
+    url: this.props.url
+  }
+
+ handleEditChange = () => {
+  let prev = this.state.edit
+    this.setState({
+      edit: !prev
+    })
+  }
+
+  handleSliderChange = (val) => {
+    this.setState({
+      value: val
+    })
+  }
+
+handleHeadlineChange(event) {
+    this.setState({headline: event.target.value});
+  }
+
+  handleUrlChange(event) {
+    this.setState({url: event.target.value});
+  }
+handleDescriptionChange(event) {
+    this.setState({description: event.target.value});
+  }
   render() {
     const { classes } = this.props;
-
+const inputStyle = {
+  color: 'black  !important'
+}
     return (
-      <Card >
-        <CardHeader title= "Your Ad" />
+      <Card>
+      { this.state.edit==false &&  <div>
+
+        <CardHeader title= "Your Ad"/>
         <CardContent>
         <div className = {classes.box}>
         <div>
         <div>
-        <div style={{color: "#1a0dab"}} >{this.props.headline1} | {this.props.headline2} </div>
+        <div style={{color: "#1a0dab"}} >{this.state.headline} </div>
         <div style={{display: "inline-block"}} className = {classes.AdBox}>Ad</div>
-        <div style={{display: "inline-block"}} className = {classes.AdBoxNext}>{this.props.url}</div>
+        <div style={{display: "inline-block"}} className = {classes.AdBoxNext}>{this.state.url}</div>
         </div>
         </div>
-          <div >{this.props.description} </div>
+          <div >{this.state.description} </div>
           </div>
+                Max CPC: {this.state.value}$
+
           <CardActions>
         <Button size="large" color="primary">
           Create Ad
         </Button>        
+        <Button size="large" color="primary" onClick={this.handleEditChange}>
+          Edit Ad
+        </Button>        
       </CardActions>
-        </CardContent>                      
+       </CardContent>
+       </div>
+     } 
+
+
+
+     { this.state.edit==true &&  <div>
+
+        <CardHeader title= "Your Ad (Edit)"/>
+        <CardContent>
+        <div className = {classes.box}>
+        <div>
+        <div>
+        <input style={{color: "#1a0dab"}}  type="text" name="headline" value ={this.state.headline}
+        onChange={this.handleHeadlineChange}
+        />                
+        <div>
+        <div style={{display: "inline-block"}} className = {classes.AdBox}>Ad</div>      
+
+        <input style={{display: "inline-block", width: "87%"}} className = {classes.AdBoxNext} type="text" name="url" value ={this.state.url}
+        onChange={this.handleUrlChange}
+        />   
+        </div>             
+        </div>
+        </div>
+          <input style={{display: "inline-block", width: "87%"}}type="text" name="url" value ={this.state.description}
+        onChange={this.handleDescriptionChange}/>
+        </div>
+        <StepSlider handleSliderChange = {this.handleSliderChange}/>                            
+        Max CPC: {this.state.value}$
+                         
+          <CardActions>
+        <Button size="large" color="primary">
+          Create Ad
+        </Button>        
+        <Button size="large" color="primary" onClick={this.handleEditChange}>
+          Save
+        </Button>        
+      </CardActions>
+       </CardContent>
+       </div>
+     }                      
       </Card>
     );
   }

@@ -8,6 +8,8 @@ import Card from "./components/Card";
 // import SForm from "./components/stateless_form"
 import Titles from "./components/titles";
 import * as _ from "lodash";
+import StepSlider from "./components/StepSlider";
+
 
 class App extends React.Component {
 
@@ -48,7 +50,7 @@ class App extends React.Component {
         categories: response.categories
       })
   }
-
+ 
   render() {
     let posts = this.state.posts
     let website = this.state.website
