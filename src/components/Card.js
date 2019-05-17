@@ -85,7 +85,7 @@ constructor(props) {
 
 state = {  
     edit: false,
-    value: '50',
+    value: '5',
     headline: this.props.headline1 + '|' + this.props.headline2,
     description: this.props.description,
     url: this.props.url
@@ -114,6 +114,17 @@ handleHeadlineChange(event) {
 handleDescriptionChange(event) {
     this.setState({description: event.target.value});
   }
+
+  handleSubmit = () => {
+    console.log("submit is called");
+    // data1 = {"headlines":[this.props.headline1, this.props.headline2], "description":this.props.description, "keywords":this.props.keywords, "url":this.props.url, "maxCPC":100000}
+    fetch('http://127.0.0.1:5000/create-ad', {method:'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({"headlines":this.state.headline.split('|'),"description":this.state.description, "keywords":this.props.keywords.split(','), "url":"www.google.com","maxCPC":this.state.value*1000000} 
+    )}).then(function(response) {console.log(response)});
+    // const response = await api_call.json();
+    // console.log(response);  
+  }
+
   render() {
     const { classes } = this.props;
 const inputStyle = {
@@ -138,7 +149,7 @@ const inputStyle = {
                 Max CPC: {this.state.value}$
 
           <CardActions>
-        <Button size="large" color="primary">
+        <Button size="large" color="primary" onClick={this.handleSubmit}>
           Create Ad
         </Button>        
         <Button size="large" color="primary" onClick={this.handleEditChange}>
@@ -177,9 +188,7 @@ const inputStyle = {
         Max CPC: {this.state.value}$
                          
           <CardActions>
-        <Button size="large" color="primary">
-          Create Ad
-        </Button>        
+     
         <Button size="large" color="primary" onClick={this.handleEditChange}>
           Save
         </Button>        

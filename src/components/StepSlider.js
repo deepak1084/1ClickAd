@@ -44,7 +44,7 @@ function valueReducer(rawValue, props, event) {
  */
 class StepSlider extends React.Component {
   state = {
-    value: 50
+    value: 5
   };
 
   handleChange = (event, value) => {
@@ -61,9 +61,9 @@ class StepSlider extends React.Component {
         <Slider
           value={value}
           valueReducer={valueReducer}
-          min={0}
-          max={104}
-          step={10}
+          min={0.01}
+          max={10}
+          step={0.01}
           onChange={this.handleChange}
         />
       </div>
