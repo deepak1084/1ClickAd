@@ -52,8 +52,9 @@ class App extends React.Component {
                 <div className="col-xs-6 form-container">                          
                    {_.map(posts, (post, index) =>  {
                       return (
-                        <Card description={post.description} headline={post.headline} image = {post.image}/> ) }                    
-                  )}                            
+                        <Card description={post.description} headline={post.headline} image = {post.image} keywords={post.keywords}/> ) }                    
+                  )}
+                </div>
               </div>
           </div>
         </div>
