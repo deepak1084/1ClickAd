@@ -146,7 +146,7 @@ const inputStyle = {
         </div>
           <div >{this.state.description} </div>
           </div>
-                Max CPC: {this.state.value}$
+                Max Cost per Click: {this.state.value} INR
 
           <CardActions>
         <Button size="large" color="primary" onClick={this.handleSubmit}>
@@ -185,7 +185,7 @@ const inputStyle = {
         onChange={this.handleDescriptionChange}/>
         </div>
         <StepSlider handleSliderChange = {this.handleSliderChange}/>                            
-        Max CPC: {this.state.value}$
+        Max Cost per Click: {this.state.value} INR
                          
           <CardActions>
      
