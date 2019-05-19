@@ -63,7 +63,7 @@ class StepSlider extends React.Component {
           valueReducer={valueReducer}
           min={0.1}
           max={10}
-          step={0.1}
+          step={1}
           onChange={this.handleChange}
         />
       </div>

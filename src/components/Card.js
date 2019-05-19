@@ -81,6 +81,7 @@ constructor(props) {
     this.handleHeadlineChange = this.handleHeadlineChange.bind(this)
     this.handleUrlChange = this.handleUrlChange.bind(this)
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
+    this.handleKeywordsChange = this.handleKeywordsChange.bind(this)
   }
 
 state = {  
@@ -88,7 +89,8 @@ state = {
     value: '5',
     headline: this.props.headline1 + '|' + this.props.headline2,
     description: this.props.description,
-    url: this.props.url
+    url: this.props.url,
+    keywords: this.props.keywords
   }
 
  handleEditChange = () => {
@@ -115,11 +117,15 @@ handleDescriptionChange(event) {
     this.setState({description: event.target.value});
   }
 
+  handleKeywordsChange(event) {
+    this.setState({keywords: event.target.value});
+  }
+
   handleSubmit = () => {
     console.log("submit is called");
     // data1 = {"headlines":[this.props.headline1, this.props.headline2], "description":this.props.description, "keywords":this.props.keywords, "url":this.props.url, "maxCPC":100000}
     fetch('http://127.0.0.1:5000/create-ad', {method:'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({"headlines":this.state.headline.split('|'),"description":this.state.description, "keywords":this.props.keywords.split(','), "url":"www.google.com","maxCPC":this.state.value*1000000} 
+      body: JSON.stringify({"headlines":this.state.headline.split('|'),"description":this.state.description, "keywords":this.state.keywords.split(','), "url":"www.google.com","maxCPC":this.state.value*1000000} 
     )}).then(function(response) {console.log(response)});
     // const response = await api_call.json();
     // console.log(response);  
@@ -131,6 +137,7 @@ const inputStyle = {
   color: 'black  !important'
 }
     return (
+      <div style={{border: "6px solid #0f0f46"}}>
       <Card>
       { this.state.edit==false &&  <div>
 
@@ -146,8 +153,15 @@ const inputStyle = {
         </div>
           <div >{this.state.description} </div>
           </div>
+          <div>
+          Keywords : 
+          <div style = {{ border: '2px solid', borderRadius: '10px/15px', marginBottom: '10px'}} > 
+            {this.state.keywords}
+          </div>
+          </div>
+          <div>
                 Max Cost per Click: {this.state.value} INR
-
+                </div>
           <CardActions>
         <Button size="large" color="primary" onClick={this.handleSubmit}>
           Create Ad
@@ -184,6 +198,12 @@ const inputStyle = {
           <input style={{display: "inline-block", width: "87%"}}type="text" name="url" value ={this.state.description}
         onChange={this.handleDescriptionChange}/>
         </div>
+        <div>
+          Keywords : 
+          <input style={{ border: '2px solid', borderRadius: '10px/15px', marginBottom: '10px'}} type="text" name="url" value ={this.state.keywords}
+        onChange={this.handleKeywordsChange}/>
+                    
+          </div>
         <StepSlider handleSliderChange = {this.handleSliderChange}/>                            
         Max Cost per Click: {this.state.value} INR
                          
@@ -197,6 +217,7 @@ const inputStyle = {
        </div>
      }                      
       </Card>
+      </div>
     );
   }
 }
