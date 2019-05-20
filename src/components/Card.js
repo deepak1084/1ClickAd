@@ -86,6 +86,7 @@ constructor(props) {
 
 state = {  
     edit: false,
+    loader: 0,
     value: '5',
     headline: this.props.headline1 + '|' + this.props.headline2,
     description: this.props.description,
@@ -122,11 +123,17 @@ handleDescriptionChange(event) {
   }
 
   handleSubmit = () => {
+    let app = this
+    this.setState({
+      loader: 2
+    })
     console.log("submit is called");
     // data1 = {"headlines":[this.props.headline1, this.props.headline2], "description":this.props.description, "keywords":this.props.keywords, "url":this.props.url, "maxCPC":100000}
     fetch('http://127.0.0.1:5000/create-ad', {method:'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({"headlines":this.state.headline.split('|'),"description":this.state.description, "keywords":this.state.keywords.split(','), "url":"www.google.com","maxCPC":this.state.value*1000000} 
-    )}).then(function(response) {console.log(response)});
+    )}).then(function(response) {      
+      console.log(response)});
+    
     // const response = await api_call.json();
     // console.log(response);  
   }
@@ -139,7 +146,7 @@ const inputStyle = {
     return (
       <div style={{border: "6px solid #0f0f46"}}>
       <Card>
-      { this.state.edit==false &&  <div>
+      { this.state.edit==false &&  this.state.loader == 0 && <div>
 
         <CardHeader title= "Your Ad"/>
         <CardContent>
@@ -175,6 +182,68 @@ const inputStyle = {
      } 
 
 
+
+{ this.state.edit==false &&  this.state.loader == 1 && <div>
+
+        <CardHeader title= "Your Ad loading"/>
+        <CardContent>
+        <div className = {classes.box}>
+        <div>
+        <div>
+        <div style={{color: "#1a0dab"}} >{this.state.headline} </div>
+        <div style={{display: "inline-block"}} className = {classes.AdBox}>Ad</div>
+        <div style={{display: "inline-block"}} className = {classes.AdBoxNext}>{this.state.url}</div>
+        </div>
+        </div>
+          <div >{this.state.description} </div>
+          </div>
+          <div>
+          Keywords : 
+          <div style = {{ border: '2px solid', borderRadius: '10px/15px', marginBottom: '10px'}} > 
+            {this.state.keywords}
+          </div>
+          </div>
+          <div>
+                Max Cost per Click: {this.state.value} INR
+                </div>
+          <CardActions>
+            <Button variant="outline-success" style = {{color: "yellow", border: "1px solid"}} disabled>Your Ad is being created</Button>
+
+      </CardActions>
+       </CardContent>
+       </div>
+     } 
+
+{ this.state.edit==false &&  this.state.loader == 2 && <div>
+
+        <CardHeader title= "Your Ad"/>
+        <CardContent>
+        <div className = {classes.box}>
+        <div>
+        <div>
+        <div style={{color: "#1a0dab"}} >{this.state.headline} </div>
+        <div style={{display: "inline-block"}} className = {classes.AdBox}>Ad</div>
+        <div style={{display: "inline-block"}} className = {classes.AdBoxNext}>{this.state.url}</div>
+        </div>
+        </div>
+          <div >{this.state.description} </div>
+          </div>
+          <div>
+          Keywords : 
+          <div style = {{ border: '2px solid', borderRadius: '10px/15px', marginBottom: '10px'}} > 
+            {this.state.keywords}
+          </div>
+          </div>
+          <div>
+                Max Cost per Click: {this.state.value} INR
+                </div>
+          <CardActions>
+            <Button variant="outline-success" style = {{color: "green", border: "1px solid"}} disabled>Your Ad is created</Button>
+
+      </CardActions>
+       </CardContent>
+       </div>
+     } 
 
      { this.state.edit==true &&  <div>
 
