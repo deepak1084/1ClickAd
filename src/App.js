@@ -134,10 +134,15 @@ class App extends React.Component {
   }
 
   handleDiscard = (index) => {
-  let posts1 = this.state.posts.splice(0,index);
-  let posts2 = this.state.posts.splice(index+1, this.state.posts.length)
+    console.log(index)
+    let ans = []
+    for(let i =0; i<this.state.posts.length;i++ ) {
+      if(i!=index) {
+        ans.push(this.state.posts[i])
+      }
+    }
   
-  this.setState({ posts: posts1.concat(posts2) });
+  this.setState({ posts: ans });
   }
   
   handleInsChange = () => {
