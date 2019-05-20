@@ -124,9 +124,11 @@ handleDescriptionChange(event) {
 
   handleSubmit = () => {
     let app = this
-    this.setState({
-      loader: 2
-    })
+    this.setState({loader:1})
+    setTimeout(function(){
+             this.setState({loader:2});
+        }.bind(this),2000);
+    
     console.log("submit is called");
     // data1 = {"headlines":[this.props.headline1, this.props.headline2], "description":this.props.description, "keywords":this.props.keywords, "url":this.props.url, "maxCPC":100000}
     fetch('http://127.0.0.1:5000/create-ad', {method:'POST', headers: {'Content-Type':'application/json'},
@@ -185,7 +187,7 @@ const inputStyle = {
 
 { this.state.edit==false &&  this.state.loader == 1 && <div>
 
-        <CardHeader title= "Your Ad loading"/>
+        <CardHeader title= "Your Ad"/>
         <CardContent>
         <div className = {classes.box}>
         <div>
@@ -207,7 +209,7 @@ const inputStyle = {
                 Max Cost per Click: {this.state.value} INR
                 </div>
           <CardActions>
-            <Button variant="outline-success" style = {{color: "yellow", border: "1px solid"}} disabled>Your Ad is being created</Button>
+            <Button variant="outline-success" style = {{color: "gray", border: "1px solid"}} disabled>Your Ad is being created</Button>
 
       </CardActions>
        </CardContent>
@@ -245,7 +247,9 @@ const inputStyle = {
        </div>
      } 
 
-     { this.state.edit==true &&  <div>
+  
+
+     { this.state.edit==true &&  this.state.loader != 1 && <div>
 
         <CardHeader title= "Your Ad (Edit)"/>
         <CardContent>
