@@ -87,6 +87,7 @@ class App extends React.Component {
     super(props);
     this.getUserData = this.getUserData.bind(this);
     this.getUserData();
+    this.handleDiscard = this.handleDiscard.bind(this)
 
   }
 
@@ -131,6 +132,13 @@ class App extends React.Component {
       ads: !prev
     })
   }
+
+  handleDiscard = (index) => {
+  let posts1 = this.state.posts.splice(0,index);
+  let posts2 = this.state.posts.splice(index+1, this.state.posts.length)
+  
+  this.setState({ posts: posts1.concat(posts2) });
+  }
   
   handleInsChange = () => {
       this.setState({ open: true });
@@ -170,7 +178,7 @@ class App extends React.Component {
                 <div className="col-xs-6 form-container">                          
                    {_.map(posts, (post, index) =>  {
                       return (
-                        <Card description={post.text} headline1={post.headline} headline2={name} image = {post.image} keywords={post.keywords} website={website} url={post.url} page_description={page_description} phone={phone} email={email}/> ) }                    
+                        <Card key = {index} index={index} description={post.text} headline1={post.headline} headline2={name} image = {post.image} keywords={post.keywords} website={website} url={post.url} page_description={page_description} phone={phone} email={email} discard={this.handleDiscard}/> ) }                    
                   )}
                 </div>
               </div>

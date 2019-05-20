@@ -82,6 +82,7 @@ constructor(props) {
     this.handleUrlChange = this.handleUrlChange.bind(this)
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
     this.handleKeywordsChange = this.handleKeywordsChange.bind(this)
+    this.handleDiscard = this.handleDiscard.bind(this)
   }
 
 state = {  
@@ -120,6 +121,10 @@ handleDescriptionChange(event) {
 
   handleKeywordsChange(event) {
     this.setState({keywords: event.target.value});
+  }
+
+  handleDiscard() {
+    this.props.discard(this.props.index);
   }
 
   handleSubmit = () => {
@@ -172,11 +177,14 @@ const inputStyle = {
                 Max Cost per Click: {this.state.value} INR
                 </div>
           <CardActions>
-        <Button size="large" color="primary" onClick={this.handleSubmit}>
+        <Button size="large" color="primary" onClick={this.handleSubmit} style={{ border: '1px solid'}}>
           Create Ad
         </Button>        
-        <Button size="large" color="primary" onClick={this.handleEditChange}>
+        <Button size="large" color="primary" onClick={this.handleEditChange} style={{ border: '1px solid'}}>
           Edit Ad
+        </Button>        
+        <Button size="large" color="primary" onClick={this.handleDiscard} style={{ border: '1px solid', color: 'red', marginLeft: '49%'}}>
+          Discard
         </Button>        
       </CardActions>
        </CardContent>
@@ -282,7 +290,7 @@ const inputStyle = {
                          
           <CardActions>
      
-        <Button size="large" color="primary" onClick={this.handleEditChange}>
+        <Button size="large" color="primary" onClick={this.handleEditChange} style={{ border: '1px solid'}}>
           Save
         </Button>        
       </CardActions>
