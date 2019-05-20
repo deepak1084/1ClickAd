@@ -88,7 +88,7 @@ constructor(props) {
 state = {  
     edit: false,
     loader: 0,
-    value: '5',
+    value: '100',
     headline: this.props.headline1 + '|' + this.props.headline2,
     description: this.props.description,
     url: this.props.url,
@@ -174,7 +174,7 @@ const inputStyle = {
           </div>
           </div>
           <div>
-                Max Cost per Click: {this.state.value} INR
+                Max Spending per day: {this.state.value} INR
                 </div>
           <CardActions>
         <Button size="large" color="primary" onClick={this.handleSubmit} style={{ border: '1px solid'}}>
@@ -214,7 +214,7 @@ const inputStyle = {
           </div>
           </div>
           <div>
-                Max Cost per Click: {this.state.value} INR
+                Max Spending per day: {this.state.value} INR
                 </div>
           <CardActions>
             <Button variant="outline-success" style = {{color: "gray", border: "1px solid"}} disabled>Your Ad is being created</Button>
@@ -245,7 +245,7 @@ const inputStyle = {
           </div>
           </div>
           <div>
-                Max Cost per Click: {this.state.value} INR
+                Max Spending per day: {this.state.value} INR
                 </div>
           <CardActions>
             <Button variant="outline-success" style = {{color: "green", border: "1px solid"}} disabled>Your Ad is created</Button>
@@ -286,7 +286,7 @@ const inputStyle = {
                     
           </div>
         <StepSlider handleSliderChange = {this.handleSliderChange}/>                            
-        Max Cost per Click: {this.state.value} INR
+        Max Spending per day: {this.state.value} INR
                          
           <CardActions>
      
